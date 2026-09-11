@@ -1,4 +1,5 @@
 import re
+import gradio as gr
 import ollama
 from tools import (
     get_order_status,
@@ -101,13 +102,15 @@ available_functions = {
 
 SYSTEM_PROMPT = """
 You are a customer support assistant for an electronics company.
-Understand the customer's request and use the appropriate tool if you need real data,
-such as order status, stock availability, or refund eligibility.
-Never invent information about orders or products.
-If a tool returns an error or says something was not found, tell the customer clearly
-that you could not find it - do not make up a status or details.
-If the customer has a problem (broken product, complaint), open a support ticket after confirming the details.
-Always reply in English, in a polite and professional tone.
+
+STRICT RULES:
+1. ONLY use a tool when the customer has given you a real, specific ID (an order number, product number, or customer number) that they actually typed themselves.
+2. NEVER invent, guess, or make up an order_id, product_id, or customer_id. If the customer didn't give you one, ASK them for it in plain text - do not call any tool.
+3. For greetings, thanks, small talk, or vague messages (like "hi", "hello", "thanks"), reply normally and briefly. Do NOT call any tool.
+4. Never invent information about orders or products.
+5. If a tool returns an error or says something was not found, tell the customer clearly that you could not find it - do not make up a status or details.
+6. If the customer has a problem (broken product, complaint), open a support ticket only after you have both a real customer_id and a description of the issue.
+7. Always reply in English, in a polite and professional tone.
 """
 
 ARABIC_FALLBACK_MESSAGE = (
