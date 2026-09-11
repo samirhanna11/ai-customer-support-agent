@@ -1,0 +1,5 @@
+[
+    {"product_id": "P01", "name": "لاب توب Dell Inspiron", "price": 25000, "description": "لاب توب مواصفات متوسطة للاستخدام اليومي"},
+    {"product_id": "P02", "name": "سماعة Bluetooth", "price": 800, "description": "سماعة لاسلكية بعمر بطارية 20 ساعة"},
+    {"product_id": "P03", "name": "ماوس Gaming", "price": 450, "description": "ماوس بإضاءة RGB وحساسية قابلة للتعديل"}
+  ]

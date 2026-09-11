@@ -1,0 +1,5 @@
+[
+    {"order_id": "1001", "product_id": "P01", "status": "shipped", "customer_id": "C01", "order_date": "2026-08-20"},
+    {"order_id": "1002", "product_id": "P02", "status": "delivered", "customer_id": "C02", "order_date": "2026-09-01"},
+    {"order_id": "1003", "product_id": "P03", "status": "processing", "customer_id": "C03", "order_date": "2026-09-08"}
+  ]
