@@ -18,8 +18,9 @@ ARABIC_PATTERN = re.compile(r"[\u0600-\u06FF]")
 
 def contains_arabic(text: str) -> bool:
     return bool(ARABIC_PATTERN.search(text))
-    
-    available_functions = {
+
+
+available_functions = {
     "get_order_status": get_order_status,
     "get_product_info": get_product_info,
     "check_stock": check_stock,
