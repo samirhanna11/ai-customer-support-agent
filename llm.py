@@ -7,8 +7,10 @@ from tools import (
     check_stock,
     create_support_ticket,
     check_refund_eligibility,
-)
+    
 
+)
+from rag import retrieve_policy
 MODEL_NAME = "llama3.2:3b"
 
 ARABIC_PATTERN = re.compile(r"[\u0600-\u06FF]")
@@ -16,9 +18,31 @@ ARABIC_PATTERN = re.compile(r"[\u0600-\u06FF]")
 
 def contains_arabic(text: str) -> bool:
     return bool(ARABIC_PATTERN.search(text))
+    
+    available_functions = {
+    "get_order_status": get_order_status,
+    "get_product_info": get_product_info,
+    "check_stock": check_stock,
+    "create_support_ticket": create_support_ticket,
+    "check_refund_eligibility": check_refund_eligibility,
+    "retrieve_policy": retrieve_policy,
+}
 
 
-tools_schema = [
+tools_schema = [    {
+        "type": "function",
+        "function": {
+            "name": "retrieve_policy",
+            "description": "Searches company policies (refund, warranty, shipping, exchange) and returns relevant policy text to answer the customer's question",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "question": {"type": "string", "description": "The customer's policy-related question"}
+                },
+                "required": ["question"],
+            },
+        },
+    },
     {
         "type": "function",
         "function": {
@@ -111,6 +135,7 @@ STRICT RULES:
 5. If a tool returns an error or says something was not found, tell the customer clearly that you could not find it - do not make up a status or details.
 6. If the customer has a problem (broken product, complaint), open a support ticket only after you have both a real customer_id and a description of the issue.
 7. Always reply in English, in a polite and professional tone.
+8. For questions about company policies (refund rules, warranty, shipping, exchange), use the retrieve_policy tool instead of answering from your own knowledge.
 """
 
 ARABIC_FALLBACK_MESSAGE = (
