@@ -1,7 +1,7 @@
 # AI Customer Support Agent
 
 ## Team
-- **Project:** Team 2 – Project 2 (DEPI Final Team Project)
+- **Project:** Team 2 – Project 2 (DEPI Team Project)
 - **Members:** Zyad Waled Talaat, Samir Hanna
 
 ## Problem Statement
